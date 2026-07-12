@@ -57,7 +57,7 @@ input:focus { outline: none; border-color: #38bdf8; }
 <div class="hover-overlay">🔍 클릭하여 한반도 근해 바람 및 파고 뷰어로 이동하기</div>
 </div>
 
-<!-- 요청으로 새로 추가된 최하단 섹션 -->
+<!-- 하단 혼합층/수온약층 학습용 신규 섹션 -->
 <div class="section-title" style="color: #38bdf8;">📍 우리의 바다는 혼합층, 수온약층, 심해층으로 구분됩니다. 혼합층이 가장 깊은 시기와 얕은 시기, 그리고 수온약층이 강한 기울기를 보이는 시기와, 약한 기울기를 보이는 시기는 언제인지 알아봅시다.</div>
 <div class="map-link-container" onclick="openViewer('oceanLayer')">
 <img src="screen11.jpg" alt="Ocean Layer Map" class="map-screenshot">
@@ -113,14 +113,14 @@ url.searchParams.set("basemap", "bathymetry");
 url.searchParams.set("showToponyms", "1");
 url.searchParams.set("objv2", "H4sIAAcIQWoAA_1S0UrDMBT9lzwp1NLcJG2zN0WUwWBDH8cocctqYE1rmg7H6L970_pE2JPswQfz0uTek3NOes.ySMyGTEhRJyQiW61853RLJlj3h0Zj52GsYbfUdaW9O5DJqbmojfXYWte12xir.HCXQhonEnIRMRozyHJOV31EGlc32nkTMD9kraoCWXFL_n6FOk41rwOmKCF8KtXM1EG76XBlB8FLwDw3ej3U9lf_Gott99Jqf2_qJ.0232vnzGbU8iYIHIlTtsTNkmY8z1iaDCuimaAMOB9OqF_p96ld77rW7BHsXad7dD_SL1SpZ9qWfjQ4EmeQIGB8EDrGfVGyM8bDWy9sHKiE8fQb4wzot3GGfz8i2u6UK.Xj5wwCCU7O2Pl2iyxo4YZzEUtcGRUMBECSRTdMsFigCZqyHKSADOd9GjG9ZLJkDExyitHK41SmCQ9S56MVdL_idfcfrb8fLc7jIEc5BZCJSDFYFIZSIqhkgqeSr.rVB.ZpD2_0BAAA");
 } else if (region === 'oceanLayer') {
-// 요청받은 혼합층/수온약층 전용 파라미터 세팅
-url.searchParams.set("z", "0"); // 수심은 항상 0m 고정
-url.searchParams.set("center", "128.54484440312714,36.96303295128663");
+// 피드백 주신 신규 링크의 암호화 키 반영 및 세팅 변경
+url.searchParams.set("z", "0"); // 수심은 항상 0m로 고정 연동
+url.searchParams.set("center", "128.54484440312714,36.96303295128662");
 url.searchParams.set("zoom", "14.001951935795296");
-url.searchParams.set("layers", "H4sIAKbYUmoAA63QUU.CMBAH8O9yz2O0ZVvbvU1UIEEhzhdiTFPXMpZ0K_mGimTf3SpReFCffL375_5_93AA2220G1vrVAvpoQ.AyL12MwUpTOaLi2wusttsvspn_fXi7mqc5fdiOV0JhLBAJBoWta5bUVslSmPFdrMXslkXAoWIjZQuxRJfDmpBfBQlw9rYru0ggLdZo.QrpBgFUH2sEgb5srFlXkijIV1L0_oAnqXZ6ZuqgTQJI8ISxiPKGaGM4a_m9GMoCjknKKYMIcIJpwEU1lhXy_0nxMmqebIv0Af.7x34eZ20f7GPiTP2SY199YQkSYgZwTGNceKhESfnylEUMsrwCLMkieIYsV_UP.zRVOWmmzi7Oya.D6raaaWU9qs7t9P94ztTxFXsEAIAAA--");
+url.searchParams.set("layers", "H4sIAN7eUmoAA63QUU.CMBAH8O9yz2O0ZVvbvU1UIEEhzhdiTFPXMpZ0K_mGimTf3SpReFCffL375_5_93AA2220G1vrVAvpoQ.AyL12MwUpTOaLi2wusttsvspn_fXi7mqc5fdiOV0JhLBAJBoWta5bUVslSmPFdrMXslkXAoWIjZQuxRJfDmpBfBQlw9rYru0ggLdZo.QrpBgFUH2sEgb5srFlXkijIV1L0_oAnqXZ6ZuqgTQJI8ISxiPKGaGM4a_m9GMoCjknKKYMIcIJpwEU1lhXy_0nxMmqebIv0Af.7x34eZ20f7GPiTP2SY199YQkSYgZwTGNceKhESfnylEUMsrwCLMkieIYsV_UP.zRVOWmmzi7Oya.D6raaaWU9qs7t9P94ztTxFXsEAIAAA--");
 url.searchParams.set("basemap", "bathymetry");
 url.searchParams.set("showToponyms", "1");
-url.searchParams.set("objv2", "H4sIAKbYUmoAA31Qy2rDMBD8F51acI0UyY6VW6G0BAIJ7TEYoyYbR2BLriybhuB.70rpE0JPWu3szszO9kz0nixIZSlJyAGUHxw0ZIF9f_oAkcdLD9EabAvencjiG9xYbTxCO2vdXhvl4y6byVRQmjOZ8AKrbF7MyikhnbMdOK.D0B9do9rAVt2TaSpRyKnuGGeqmoanVd1KncAt40oTVuLMSwe72Btv.C02__G1B._g22d4W4.gnN4HLTM0zRe4UTWswNQ_CqCpiw3Uwbqq_RU5dkXu_I.cmUADo.LamvBxytR43fYOI0nuaCqkoDMhJZOFZDybC7y4Ve9Ls2uGXo846t0AE9q55vg3N6c..jlGlxAwjXI1PH0GGIgwdm3WhwMyRRN5kdI8ywWVvOAyy5I5TSmTgguRM5ZJxsqp.AAAkJkPFwIAAA--");
+url.searchParams.set("objv2", "H4sIAN7eUmoAA1VQ0WqDMBT9lzxtYCVpojV9G4yNQqFleyxSsvZoA5q4GGUyfPed6BhrbkLO93ty_ib6SrbkbCmJSAXKDw56ssW5nzpA5GWdIVqDbcG7iWz.wKPVxiN0sdZdtVF_0TIu4jQRGc2iRMS0yBOalHNEOmc7cF4H0l2uUW1wOz_ReS4xyKnutnDONQtXq7q9msDtFkkTJAvnvYPLMhsfbo847IePHvyzbt.g8zCCc.q6ZkEDo.LamvBwytQYd9owSqMNjYUUlAspmSwkS9JcYIVWfe3MpRl6PSLVuwFmXGD1P6oa9mBqv3b85805kta9sHhQgGmUq_H1d6NghP_gzaGq0CmUSBmPZTgso7RIeREl6ztnLJNFnguelXP5A5vXD1upAQAA");
 }
 
 window.open(url.toString(), '_blank');
