@@ -1,121 +1,129 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>해군 해양정보 체험용 어플리케이션</title>
-    <style>
-        body { font-family: 'Malgun Gothic', sans-serif; background-color: #0f172a; color: #f8fafc; margin: 0; padding: 40px 20px; text-align: center; }
-        .container { max-width: 900px; margin: 0 auto; }
-        h1 { font-size: 2rem; margin-bottom: 10px; color: #38bdf8; }
-        p { color: #94a3b8; margin-bottom: 30px; }
-        .control-panel { padding: 25px; background: #1e293b; border: 1px solid #334155; border-radius: 12px; margin-bottom: 30px; display: inline-block; text-align: left; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); width: 100%; box-sizing: border-box; max-width: 500px; }
-        .form-group { margin-bottom: 15px; }
-        label { font-weight: bold; color: #cbd5e1; display: inline-block; width: 140px; }
-        input { padding: 8px 12px; background-color: #0f172a; border: 1px solid #475569; border-radius: 6px; color: #f8fafc; font-size: 1rem; }
-        input:focus { outline: none; border-color: #38bdf8; }
-        .section-title { margin-top: 50px; margin-bottom: 15px; font-size: 1.25rem; color: #cbd5e1; font-weight: bold; }
-        .map-link-container { display: inline-block; position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); transition: transform 0.3s ease; cursor: pointer; margin-bottom: 20px; max-width: 100%; }
-        .map-link-container:hover { transform: scale(1.02); }
-        .map-screenshot { display: block; max-width: 100%; height: auto; border: 2px solid #334155; border-radius: 12px; }
-        .hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(15, 23, 42, 0.9)); padding: 20px; font-size: 1.1rem; font-weight: bold; color: #38bdf8; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>해군 해양정보 체험용 어플리케이션</title>
+<style>
+body { font-family: 'Malgun Gothic', sans-serif; background-color: #0f172a; color: #f8fafc; margin: 0; padding: 40px 20px; text-align: center; }
+.container { max-width: 900px; margin: 0 auto; }
+h1 { font-size: 2rem; margin-bottom: 10px; color: #38bdf8; }
+p { color: #94a3b8; margin-bottom: 30px; }
+.control-panel { padding: 25px; background: #1e293b; border: 1px solid #334155; border-radius: 12px; margin-bottom: 30px; display: inline-block; text-align: left; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); width: 100%; box-sizing: border-box; max-width: 500px; }
+.form-group { margin-bottom: 15px; }
+label { font-weight: bold; color: #cbd5e1; display: inline-block; width: 140px; }
+input { padding: 8px 12px; background-color: #0f172a; border: 1px solid #475569; border-radius: 6px; color: #f8fafc; font-size: 1rem; }
+input:focus { outline: none; border-color: #38bdf8; }
+.section-title { margin-top: 50px; margin-bottom: 15px; font-size: 1.25rem; color: #cbd5e1; font-weight: bold; }
+.map-link-container { display: inline-block; position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); transition: transform 0.3s ease; cursor: pointer; margin-bottom: 20px; max-width: 100%; }
+.map-link-container:hover { transform: scale(1.02); }
+.map-screenshot { display: block; max-width: 100%; height: auto; border: 2px solid #334155; border-radius: 12px; }
+.hover-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(15, 23, 42, 0.9)); padding: 20px; font-size: 1.1rem; font-weight: bold; color: #38bdf8; }
+</style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Navy Expert for Oceanography (NEO)</h1>
-    <!-- 이 두 줄의 폰트 사이즈가 1.25rem으로 설정되었습니다 -->
-    <p style="font-size: 1.25rem;">아래에서 수심과 날짜를 지정한 후, 원하는 해역의 지도를 클릭하면 해당 조건으로 뷰어가 열립니다.</p>
-    <p style="font-size: 1.25rem;">* 제작 : 길범준  / 데이터 출처 : Copernicus Marine Data Store </p>    
-    <p> 국립해양조사원 도서관(우리바다해양정보도) : <a href="https://www.khoa.go.kr/webzine/bookstand.do?pub_type=5&paging=1" target="_blank" style="color: #38bdf8;">https://www.khoa.go.kr/webzine/bookstand.do?pub_type=5&paging=1</a> </p>
-    <div class="control-panel">
-        <div class="form-group">
-            <label for="depthInput">수심 입력 (m):</label>
-            <input type="number" id="depthInput" value="-40" style="width: 100px;">
-        </div>
-        <div class="form-group">
-            <label for="dateInput">날짜 입력:</label>
-            <!-- 1. 고정된 value 값 제거 -->
-            <input type="date" id="dateInput">
-        </div>
-    </div>
+<h1>Navy Expert for Oceanography (NEO)</h1>
+<p style="font-size: 1.25rem;">아래에서 수심과 날짜를 지정한 후, 원하는 해역의 지도를 클릭하면 해당 조건으로 뷰어가 열립니다.</p>
+<p style="font-size: 1.25rem;">* 제작 : 길범준 / 데이터 출처 : Copernicus Marine Data Store </p>
+ <p> 국립해양조사원 도서관(우리바다해양정보도) : <a href="https://www.khoa.go.kr/webzine/bookstand.do?pub_type=5&paging=1" target="_blank" style="color: #38bdf8;">https://www.khoa.go.kr/webzine/bookstand.do?pub_type=5&paging=1</a> </p>
+<div class="control-panel">
+<div class="form-group">
+<label for="depthInput">수심 입력 (m):</label>
+<input type="number" id="depthInput" value="-40" style="width: 100px;">
 </div>
-    <div class="section-title" style="color: #38bdf8;">📍 한반도 동해의 수온과 해류 구조를 수심별로 관찰해 봅시다. 어떤 것이 수온전선이고 동한난류와 북한한류는 어디에 분포하나요?</div>
-    <div class="map-link-container" onclick="openViewer('eastSea')">
-        <img src="screen.png" alt="East Sea Map" class="map-screenshot">
-        <div class="hover-overlay">🔍 클릭하여 동해 지도로 이동하기</div>
-    </div>
+<div class="form-group">
+<label for="dateInput">날짜 입력:</label>
+<input type="date" id="dateInput">
+</div>
+</div>
+</div>
+<div class="section-title" style="color: #38bdf8;">📍 한반도 동해의 수온과 해류 구조를 수심별로 관찰해 봅시다. 어떤 것이 수온전선이고 동한난류와 북한한류는 어디에 분포하나요?</div>
+<div class="map-link-container" onclick="openViewer('eastSea')">
+<img src="screen.png" alt="East Sea Map" class="map-screenshot">
+<div class="hover-overlay">🔍 클릭하여 동해 지도로 이동하기</div>
+</div>
 
-    <div class="section-title" style="color: #38bdf8;">📍 서·남해 일대의 수온과 해류 구조를 관찰해 봅시다. 수온역전은 주로 언제 어디서 발생할까요? 저염분수는 어디서 나타날까요? </div>
-    <div class="map-link-container" onclick="openViewer('westSouthSea')">
-        <img src="screen11.jpg" alt="West/South Sea Map" class="map-screenshot">
-        <div class="hover-overlay">🔍 클릭하여 서·남해 지도로 이동하기</div>
-    </div>
+<div class="section-title" style="color: #38bdf8;">📍 서·남해 일대의 수온과 해류 구조를 관찰해 봅시다. 수온역전은 주로 언제 어디서 발생할까요? 저염분수는 어디서 나타날까요? </div>
+<div class="map-link-container" onclick="openViewer('westSouthSea')">
+<img src="screen11.jpg" alt="West/South Sea Map" class="map-screenshot">
+<div class="hover-overlay">🔍 클릭하여 서·남해 지도로 이동하기</div>
+</div>
 
-    <!-- 추가된 맨 아래 새로운 섹션 -->
-    <div class="section-title" style="color: #38bdf8;">📍 한반도 근해 바람(해상풍) 풍속 및 파고의 시계열 변화를 알아봅시다. 겨울철과 여름철 바람은 어떻게 다를까요? </div>
-    <div class="map-link-container" onclick="openViewer('koreaWindWave')">
-        <img src="screen22.jpg" alt="Korea Wind and Wave Map" class="map-screenshot">
-        <div class="hover-overlay">🔍 클릭하여 한반도 근해 바람 및 파고 뷰어로 이동하기</div>
-    </div>
+<div class="section-title" style="color: #38bdf8;">📍 한반도 근해 바람(해상풍) 풍속 및 파고의 시계열 변화를 알아봅시다. 겨울철과 여름철 바람은 어떻게 다를까요? </div>
+<div class="map-link-container" onclick="openViewer('koreaWindWave')">
+<img src="screen22.jpg" alt="Korea Wind and Wave Map" class="map-screenshot">
+<div class="hover-overlay">🔍 클릭하여 한반도 근해 바람 및 파고 뷰어로 이동하기</div>
+</div>
+
+<!-- 요청으로 새로 추가된 최하단 섹션 -->
+<div class="section-title" style="color: #38bdf8;">📍 우리의 바다는 혼합층, 수온약층, 심해층으로 구분됩니다. 혼합층이 가장 깊은 시기와 얕은 시기, 그리고 수온약층이 강한 기울기를 보이는 시기와, 약한 기울기를 보이는 시기는 언제인지 알아봅시다.</div>
+<div class="map-link-container" onclick="openViewer('oceanLayer')">
+<img src="screen11.jpg" alt="Ocean Layer Map" class="map-screenshot">
+<div class="hover-overlay">🔍 클릭하여 혼합층/수온약층 뷰어로 이동하기</div>
+</div>
 
 <script>
-/**
- * 2. 페이지 로딩 시 자동으로 오늘 날짜 설정하는 스크립트 추가
- */
 document.addEventListener('DOMContentLoaded', function() {
-    const dateInput = document.getElementById('dateInput');
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    let mm = today.getMonth() + 1; // 월은 0부터 시작하므로 +1
-    let dd = today.getDate();
+const dateInput = document.getElementById('dateInput');
+const today = new Date();
+const yyyy = today.getFullYear();
+let mm = today.getMonth() + 1;
+let dd = today.getDate();
 
-    // 월과 일이 한 자리 수일 경우 앞에 0을 붙여 형식 맞춤 (YYYY-MM-DD)
-    if (mm < 10) mm = '0' + mm;
-    if (dd < 10) dd = '0' + dd;
+if (mm < 10) mm = '0' + mm;
+if (dd < 10) dd = '0' + dd;
 
-    const formattedToday = `${yyyy}-${mm}-${dd}`;
-    dateInput.value = formattedToday;
+const formattedToday = `${yyyy}-${mm}-${dd}`;
+dateInput.value = formattedToday;
 });
 
 function openViewer(region) {
-    const depth = document.getElementById('depthInput').value.trim();
-    const dateVal = document.getElementById('dateInput').value;
-    const timestamp = new Date(`${dateVal}T12:00:00`).getTime();
+const depth = document.getElementById('depthInput').value.trim();
+const dateVal = document.getElementById('dateInput').value;
+const timestamp = new Date(`${dateVal}T12:00:00`).getTime();
 
-    if (isNaN(timestamp)) { alert("날짜 형식이 올바르지 않습니다."); return; }
+if (isNaN(timestamp)) { alert("날짜 형식이 올바르지 않습니다."); return; }
 
-    let url = new URL("https://data.marine.copernicus.eu/viewer/expert");
-    url.searchParams.set("view", "viewer");
-    url.searchParams.set("crs", "epsg:4326");
-    url.searchParams.set("t", timestamp); // 기본적으로 입력한 날짜 연동
+let url = new URL("https://data.marine.copernicus.eu/viewer/expert");
+url.searchParams.set("view", "viewer");
+url.searchParams.set("crs", "epsg:4326");
+url.searchParams.set("t", timestamp); 
 
-    if (region === 'eastSea') {
-        url.searchParams.set("z", depth);
-        url.searchParams.set("center", "130.16038204953057,39.0627401581225");
-        url.searchParams.set("zoom", "14.583824767779062");
-        url.searchParams.set("layers", "H4sIAMe1PGoAA6WQT0.CQBDFv8ueK2y3FEpvFRVJUIj1QoyZrNuhNNl2yHYLVsJ3d4EoBwkXD3N58_e9_b3tGNkVmhGRyWoW7.Yeo7VUhW1ZzDuRx7Rs0UwyFrPxdHabTCF5TqaLdJI_zF7uR0n6CvPHBXDuAxe9riqxrKGkDHJNsF61N_66lQSyWirgHR4FGeYw9_9uShBug.e7pwnmsa9JleEniyPuseLgCJo7WVOeKqmRxUupa3RCka.s2FCzPub63VekyZTypBpZVB_0dfJG6gafiurwUBgI7od94fddBcPhT1c6W9Hxe1EQ8oEbCAaCD.bedToi.D8e1ZhrbGqUsJUWDWxQ09H4zGl45iQucaptq3EujS2URhffmuYvvQsO_.dvzBHUqBcCAAA-");
-        url.searchParams.set("basemap", "dark");
-    } else if (region === 'westSouthSea') {
-        url.searchParams.set("z", depth);     // 입력한 수심
-        url.searchParams.set("center", "122.78211050504403,33.858696115669225");
-        url.searchParams.set("zoom", "13.75413737458402");
-        url.searchParams.set("layers", "H4sIAHbdP2oAA6WSX0.CMBTFv0ufx_i.sXZviAokKMT5Qoxp6lZgSUdJN0AkfHe7ER2JkxdeT3vPufd379sRmHKl7MAYmxYgOp48YDYyycoDiKDPPKDlQdlxCiIwnEzv_hPRf_5P5vE4fpy_PAz68auYjeYCQiQgpt0kV3khcpOKpTZiszp0nHspjZDrRSKgDxlJ1VLM0H0nF9hVwF73.AN44Gu8TtUniBj0QFYlCg2drM0yTqRWIFpIXSgnZMtVObRmu6n7_q1PjDY2l2fVymz9YfZO3km9VU.ZGkTIhxwFIUSEcYJwSOnPq3SxGPnEPRPMeMgpx.jkXaeDg9vxJFt7jU2hpNjLUlmxU9rUwQ0n3nDCbZyK8qDVTNoyS7Ry7Zd2_5dea0JdGRtduddmrShunb24ehbF5UmEzaiobdRmx5j7mGEeIBJQziANL1dMqN8jLCA0oAHjrNr.P0eTFaMsTZUzrKid3r8BjNPYySkDAAA-");
-        url.searchParams.set("basemap", "bathymetry");
-        url.searchParams.set("objv2", "H4sIAHbdP2oAA1VQ3WqDMBR_l1xtYCWJ8Se9G4yNQqFluyxSsvZoA5q4GGUyfPed6BhrbkLO93ty_ib6SrbkbCmJSAXKDw56ssW5nzpA5GWdIVqDbcG7iWz.wKPVxiN0sdZdtVF_0TIu4jQRGc2iRMS0yBOalHNEOmc7cF4H0l2uUW1wOz_ReS4xyKnutnDONQtXq7q9msDtFkkTJAvnvYPLMhsfbo847IePHvyzbt.g8zCCc.q6ZkEDo.LamvBwytQYd9owSqMNjYUUlAspmSwkS9JcYIVWfe3MpRl6PSLVuwFmXGD1P6oa9mBqv3b85805kta9sHhQgGmUq_H1d6NghP_gzaGq0CmUSBmPZTgso7RIeREl6ztnLJNFnguelXP5A5vXD1upAQAA");
-    } else if (region === 'koreaWindWave') {
-        // [바람 및 파고] 신규 링크 전용 파라미터 세팅
-        url.searchParams.set("z", "0");       // 수심은 항상 0m로 고정
-        url.searchParams.set("center", "122.1596444656512,35.75925313043281");
-        url.searchParams.set("zoom", "12.744966035784621");
-        url.searchParams.set("layers", "H4sIAAcIQWoAA22QX2_CMBTFv0v3iloqm4Y3xjYhwT8RozHLclOhYpNCSUEdM373FTAby_xbzz33nnt.7xckywNTrpQqLpB9uRpI0IopP0Y2mgTzZycAZ_YE29AP3_bLV9cJV7Bx1oCxCZiMBlHK0gJSGUMiJJzpCWi2jwD38XgYswQWq6HX40AwsUxzsPamGBnoy89i9olsExuI10kgalnIJIyoYMjeU1EwA52oOLIpz5Ctje2H6rYnA0VSSJXSvNlTUZ7t5LmewJNDOVHy2BaauKtx58hmmCtomv_EyZxGvKx0Vn.cpbDxZy_gUcDC20JgwWy5AmwSTcC6XS93Re.MsxZBfqggUyUIS0MwyWMLwfRqBASPBrWxg4D8IiD3EBRlJVgoRe3pSguqSh4Jpu8p1VGrf4gkilZ6Wn4zuXVNyw.75v0H1Sx1.fgGBSYg.Q8CAAA-");
-        url.searchParams.set("basemap", "bathymetry");
-        url.searchParams.set("showToponyms", "1");
-        url.searchParams.set("objv2", "H4sIAAcIQWoAA_1S0UrDMBT9lzwp1NLcJG2zN0WUwWBDH8cocctqYE1rmg7H6L970_pE2JPswQfz0uTek3NOes.ySMyGTEhRJyQiW61853RLJlj3h0Zj52GsYbfUdaW9O5DJqbmojfXYWte12xir.HCXQhonEnIRMRozyHJOV31EGlc32nkTMD9kraoCWXFL_n6FOk41rwOmKCF8KtXM1EG76XBlB8FLwDw3ej3U9lf_Gott99Jqf2_qJ.0232vnzGbU8iYIHIlTtsTNkmY8z1iaDCuimaAMOB9OqF_p96ld77rW7BHsXad7dD_SL1SpZ9qWfjQ4EmeQIGB8EDrGfVGyM8bDWy9sHKiE8fQb4wzot3GGfz8i2u6UK.Xj5wwCCU7O2Pl2iyxo4YZzEUtcGRUMBECSRTdMsFigCZqyHKSADOd9GjG9ZLJkDExyitHK41SmCQ9S56MVdL_idfcfrb8fLc7jIEc5BZCJSDFYFIZSIqhkgqeSr.rVB.ZpD2_0BAAA");
-    }
-    
-    window.open(url.toString(), '_blank');
+if (region === 'eastSea') {
+url.searchParams.set("z", depth);
+url.searchParams.set("center", "130.16038204953057,39.0627401581225");
+url.searchParams.set("zoom", "14.583824767779062");
+url.searchParams.set("layers", "H4sIAMe1PGoAA6WQT0.CQBDFv8ueK2y3FEpvFRVJUIj1QoyZrNuhNNl2yHYLVsJ3d4EoBwkXD3N58_e9_b3tGNkVmhGRyWoW7.Yeo7VUhW1ZzDuRx7Rs0UwyFrPxdHabTCF5TqaLdJI_zF7uR0n6CvPHBXDuAxe9riqxrKGkDHJNsF61N_66lQSyWirgHR4FGeYw9_9uShBug.e7pwnmsa9JleEniyPuseLgCJo7WVOeKqmRxUupa3RCka.s2FCzPub63VekyZTypBpZVB_0dfJG6gafiurwUBgI7od94fddBcPhT1c6W9Hxe1EQ8oEbCAaCD.bedToi.D8e1ZhrbGqUsJUWDWxQ09H4zGl45iQucaptq3EujS2URhffmuYvvQsO_.dvzBHUqBcCAAA-");
+url.searchParams.set("basemap", "dark");
+} else if (region === 'westSouthSea') {
+url.searchParams.set("z", depth); 
+url.searchParams.set("center", "122.78211050504403,33.858696115669225");
+url.searchParams.set("zoom", "13.75413737458402");
+url.searchParams.set("layers", "H4sIAHbdP2oAA6WSX0.CMBTFv0ufx_i.sXZviAokKMT5Qoxp6lZgSUdJN0AkfHe7ER2JkxdeT3vPufd379sRmHKl7MAYmxYgOp48YDYyycoDiKDPPKDlQdlxCiIwnEzv_hPRf_5P5vE4fpy_PAz68auYjeYCQiQgpt0kV3khcpOKpTZiszp0nHspjZDrRSKgDxlJ1VLM0H0nF9hVwF73.AN44Gu8TtUniBj0QFYlCg2drM0yTqRWIFpIXSgnZMtVObRmu6n7_q1PjDY2l2fVymz9YfZO3km9VU.ZGkTIhxwFIUSEcYJwSOnPq3SxGPnEPRPMeMgpx.jkXaeDg9vxJFt7jU2hpNjLUlmxU9rUwQ0n3nDCbZyK8qDVTNoyS7Ry7Zd2_5dea0JdGRtduddmrShunb24ehbF5UmEzaiobdRmx5j7mGEeIBJQziANL1dMqN8jLCA0oAHjrNr.P0eTFaMsTZUzrKid3r8BjNPYySkDAAA-");
+url.searchParams.set("basemap", "bathymetry");
+url.searchParams.set("objv2", "H4sIAHbdP2oAA1VQ3WqDMBR_l1xtYCWJ8Se9G4yNQqFluyxSsvZoA5q4GGUyfPed6BhrbkLO93ty_ib6SrbkbCmJSAXKDw56ssW5nzpA5GWdIVqDbcG7iWz.wKPVxiN0sdZdtVF_0TIu4jQRGc2iRMS0yBOalHNEOmc7cF4H0l2uUW1wOz_ReS4xyKnutnDONQtXq7q9msDtFkkTJAvnvYPLMhsfbo847IePHvyzbt.g8zCCc.q6ZkEDo.LamvBwytQYd9owSqMNjYUUlAspmSwkS9JcYIVWfe3MpRl6PSLVuwFmXGD1P6oa9mBqv3b85805kta9sHhQgGmUq_H1d6NghP_gzaGq0CmUSBmPZTgso7RIeREl6ztnLJNFnguelXP5A5vXD1upAQAA");
+} else if (region === 'koreaWindWave') {
+url.searchParams.set("z", "0"); 
+url.searchParams.set("center", "122.1596444656512,35.75925313043281");
+url.searchParams.set("zoom", "12.744966035784621");
+url.searchParams.set("layers", "H4sIAAcIQWoAA22QX2_CMBTFv0v3iloqm4Y3xjYhwT8RozHLclOhYpNCSUEdM373FTAby_xbzz33nnt.7xckywNTrpQqLpB9uRpI0IopP0Y2mgTzZycAZ_YE29AP3_bLV9cJV7Bx1oCxCZiMBlHK0gJSGUMiJJzpCWi2jwD38XgYswQWq6HX40AwsUxzsPamGBnoy89i9olsExuI10kgalnIJIyoYMjeU1EwA52oOLIpz5Ctje2H6rYnA0VSSJXSvNlTUZ7t5LmewJNDOVHy2BaauKtx58hmmCtomv_EyZxGvKx0Vn.cpbDxZy_gUcDC20JgwWy5AmwSTcC6XS93Re.MsxZBfqggUyUIS0MwyWMLwfRqBASPBrWxg4D8IiD3EBRlJVgoRe3pSguqSh4Jpu8p1VGrf4gkilZ6Wn4zuXVNyw.75v0H1Sx1.fgGBSYg.Q8CAAA-");
+url.searchParams.set("basemap", "bathymetry");
+url.searchParams.set("showToponyms", "1");
+url.searchParams.set("objv2", "H4sIAAcIQWoAA_1S0UrDMBT9lzwp1NLcJG2zN0WUwWBDH8cocctqYE1rmg7H6L970_pE2JPswQfz0uTek3NOes.ySMyGTEhRJyQiW61853RLJlj3h0Zj52GsYbfUdaW9O5DJqbmojfXYWte12xir.HCXQhonEnIRMRozyHJOV31EGlc32nkTMD9kraoCWXFL_n6FOk41rwOmKCF8KtXM1EG76XBlB8FLwDw3ej3U9lf_Gott99Jqf2_qJ.0232vnzGbU8iYIHIlTtsTNkmY8z1iaDCuimaAMOB9OqF_p96ld77rW7BHsXad7dD_SL1SpZ9qWfjQ4EmeQIGB8EDrGfVGyM8bDWy9sHKiE8fQb4wzot3GGfz8i2u6UK.Xj5wwCCU7O2Pl2iyxo4YZzEUtcGRUMBECSRTdMsFigCZqyHKSADOd9GjG9ZLJkDExyitHK41SmCQ9S56MVdL_idfcfrb8fLc7jIEc5BZCJSDFYFIZSIqhkgqeSr.rVB.ZpD2_0BAAA");
+} else if (region === 'oceanLayer') {
+// 요청받은 혼합층/수온약층 전용 파라미터 세팅
+url.searchParams.set("z", "0"); // 수심은 항상 0m 고정
+url.searchParams.set("center", "128.54484440312714,36.96303295128663");
+url.searchParams.set("zoom", "14.001951935795296");
+url.searchParams.set("layers", "H4sIAKbYUmoAA63QUU.CMBAH8O9yz2O0ZVvbvU1UIEEhzhdiTFPXMpZ0K_mGimTf3SpReFCffL375_5_93AA2220G1vrVAvpoQ.AyL12MwUpTOaLi2wusttsvspn_fXi7mqc5fdiOV0JhLBAJBoWta5bUVslSmPFdrMXslkXAoWIjZQuxRJfDmpBfBQlw9rYru0ggLdZo.QrpBgFUH2sEgb5srFlXkijIV1L0_oAnqXZ6ZuqgTQJI8ISxiPKGaGM4a_m9GMoCjknKKYMIcIJpwEU1lhXy_0nxMmqebIv0Af.7x34eZ20f7GPiTP2SY199YQkSYgZwTGNceKhESfnylEUMsrwCLMkieIYsV_UP.zRVOWmmzi7Oya.D6raaaWU9qs7t9P94ztTxFXsEAIAAA--");
+url.searchParams.set("basemap", "bathymetry");
+url.searchParams.set("showToponyms", "1");
+url.searchParams.set("objv2", "H4sIAKbYUmoAA31Qy2rDMBD8F51acI0UyY6VW6G0BAIJ7TEYoyYbR2BLriybhuB.70rpE0JPWu3szszO9kz0nixIZSlJyAGUHxw0ZIF9f_oAkcdLD9EabAvencjiG9xYbTxCO2vdXhvl4y6byVRQmjOZ8AKrbF7MyikhnbMdOK.D0B9do9rAVt2TaSpRyKnuGGeqmoanVd1KncAt40oTVuLMSwe72Btv.C02__G1B._g22d4W4.gnN4HLTM0zRe4UTWswNQ_CqCpiw3Uwbqq_RU5dkXu_I.cmUADo.LamvBxytR43fYOI0nuaCqkoDMhJZOFZDybC7y4Ve9Ls2uGXo846t0AE9q55vg3N6c..jlGlxAwjXI1PH0GGIgwdm3WhwMyRRN5kdI8ywWVvOAyy5I5TSmTgguRM5ZJxsqp.AAAkJkPFwIAAA--");
+}
+
+window.open(url.toString(), '_blank');
 }
 </script>
 
