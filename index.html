@@ -66,8 +66,19 @@ input:focus { outline: none; border-color: #38bdf8; }
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 const dateInput = document.getElementById('dateInput');
-// 원본 링크가 바라보고 있는 정상 날짜(2026-07-12)를 기본 초기값으로 제공하여 오류를 방지합니다.
-dateInput.value = "2026-07-12";
+
+// 접속한 오늘 날짜를 구해서 YYYY-MM-DD 형식으로 포맷팅합니다.
+const today = new Date();
+const yyyy = today.getFullYear();
+let mm = today.getMonth() + 1;
+let dd = today.getDate();
+
+if (mm < 10) mm = '0' + mm;
+if (dd < 10) dd = '0' + dd;
+
+const formattedToday = `${yyyy}-${mm}-${dd}`;
+// 항상 접속 기준으로 날짜를 동적 업데이트합니다.
+dateInput.value = formattedToday;
 });
 
 function openViewer(region) {
@@ -80,13 +91,12 @@ if (isNaN(timestamp)) { alert("날짜 형식이 올바르지 않습니다."); re
 let url;
 
 if (region === 'oceanLayer') {
-// [검증완료] 수직 구조 패널이 완벽하게 켜지는 원본 풀 링크 문자열을 그대로 Base로 활용합니다.
+// 수직 구조 패널을 온전히 포함한 원본 베이스 URL을 활용합니다.
 const baseOriginalUrl = "https://data.marine.copernicus.eu/viewer/expert?view=viewer&crs=epsg%3A4326&t=1783900800000&z=-0.49402499198913574&center=128.54484440312714%2C36.96303295128662&zoom=14.001951935795296&layers=H4sIAN7eUmoAA63QUU.CMBAH8O9yz2O0ZVvbvU1UIEEhzhdiTFPXMpZ0K_mGimTf3SpReFCffL375_5_93AA2220G1vrVAvpoQ.AyL12MwUpTOaLi2wusttsvspn_fXi7mqc5fdiOV0JhLBAJBoWta5bUVslSmPFdrMXslkXAoWIjZQuxRJfDmpBfBQlw9rYru0ggLdZo.QrpBgFUH2sEgb5srFlXkijIV1L0_oAnqXZ6ZuqgTQJI8ISxiPKGaGM4a_m9GMoCjknKKYMIcIJpwEU1lhXy_0nxMmqebIv0Af.7x34eZ20f7GPiTP2SY199YQkSYgZwTGNceKhESfnylEUMsrwCLMkieIYsV_UP.zRVOWmmzi7Oya.D6raaaWU9qs7t9P94ztTxFXsEAIAAA--&basemap=bathymetry&objv2=H4sIAN7eUmoAA1VQ0WqDMBT9lzxtYCVpojV9G4yNQqFleyxSMr3agCYuRpkM.303Osb6lOScc885N5dvokuyJ1dLSUQqUH5w0JM94n7qAJmXFUO2BtuCdxPZ.5Fnq41HqrDWldoov8yyrYwFpSmTEc.wluyybT5HpHO2A_d1EN3lGtUGt_sTmeccg5zqbovmWvNwtKo7qgncYRlpWCgTNO8dFAs2PtweEeyHjx78s27f4PM0gnO6XLOggVF5bU14OGVqjLtssGO0obGQgm6FlExmkvFkJ7BCq74OpmiGXo8o9W6AGRdY.c_qhiOY2q8d.3lziqJ1LyweJsA0ytXw_rtRMMJ.0OZUVei0lEizmKZJKqjkGZdJEu1oTJkUXIiUsUQyls.5D2jHm5ioAQAA&showToponyms=1";
 url = new URL(baseOriginalUrl);
-// 날짜(t) 매개변수만 상단 패널과 동적으로 연동하며, 레이어 및 수직구조 설정은 원본을 100% 보존합니다.
+// 설정된 날짜 파라미터만 업데이트합니다.
 url.searchParams.set("t", timestamp);
 } else {
-// 다른 지역들은 기존의 안전한 방식으로 처리합니다.
 url = new URL("https://data.marine.copernicus.eu/viewer/expert");
 url.searchParams.set("view", "viewer");
 url.searchParams.set("crs", "epsg:4326");
